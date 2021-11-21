@@ -14,6 +14,8 @@ Telegram bot to organize hangouts with friends (yes I'm _this_ desperate).
 8. [Bot that works with polls example](https://github.com/python-telegram-bot/python-telegram-bot/blob/master/examples/inlinebot.py)
 9. [Arbitrary callback data example](https://github.com/python-telegram-bot/python-telegram-bot/blob/master/examples/arbitrarycallbackdatabot.py)
 10. [Conversation bot example](https://github.com/python-telegram-bot/python-telegram-bot/blob/master/examples/conversationbot.py)
+### Timeless resources
+11. [Code snippets](https://github.com/python-telegram-bot/python-telegram-bot/wiki/Code-snippets)
 
 # Installation
 This bot requires the python-telegram-bot API (probably the most used to make bots in python).
