@@ -1,0 +1,13 @@
+Ecco la lista dei comandi:
+
+/wiki - tutorial approfondito sull'utilizzo del bot
+
+/usciamo - avvia una nuova quest per uscire insieme
+/join - unisciti all'uscita di gruppo
+/quando - scegliamo a che ora vederci
+/dove - diamoci un luogo d'incontro
+/cosa - stabiliamo già cosa fare (optional)
+/new - aggiungi un'attività alla lista delle proposte
+/tucosavuoifare - mostra la lista delle proposte
+
+/quindi - mostra un log di ciò che si è deciso fino ad ora
