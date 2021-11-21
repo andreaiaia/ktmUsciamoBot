@@ -4,7 +4,7 @@ import logging
 from src.helpers import get_msg
 
 # Insert your token, you can have one from the BotFather
-TOKEN = "2094326543:AAFFhZREiRK51eujOED-BWHgz2gxA9tf6yM"
+TOKEN = "INSERISCI IL TUO TOKEN"
 
 def start(update: Update, context: CallbackContext) -> None:
   context.bot.send_message(chat_id=update.effective_chat.id, text=get_msg('start'))
