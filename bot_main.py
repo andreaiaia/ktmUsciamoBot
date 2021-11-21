@@ -29,13 +29,13 @@ def hangout(update: Update, _: CallbackContext) -> None:
       [InlineKeyboardButton("IO CI SONO", callback_data='1')]
   ]
   reply_markup = InlineKeyboardMarkup(keyboard)
-  update.message.reply_text(get_msg('hangout'), reply_markup=reply_markup)
+  update.message.reply_text(get_msg('/hangout'), reply_markup=reply_markup)
 
 def main():
   # Create the Updater and pass the Token
   updater = Updater(TOKEN, use_context=True)
   # Create a dispatcher variable for ease
-  dispatcher = updater.dispatcher
+  dp = updater.dispatcher
   # This prints error's log to help with debug
   logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
                       level=logging.INFO)
@@ -45,16 +45,16 @@ def main():
   
   # Basic commands - starting and using the bot
   start_handler = CommandHandler('start', simple_reply)
-  dispatcher.add_handler(start_handler)
+  dp.add_handler(start_handler)
   help_handler = CommandHandler('help', simple_reply)
-  dispatcher.add_handler(help_handler)
+  dp.add_handler(help_handler)
   wiki_handler = CommandHandler('wiki', simple_reply)
-  dispatcher.add_handler(wiki_handler)
+  dp.add_handler(wiki_handler)
 
   # Hangouts making
   hangout_handler = CommandHandler('usciamo', hangout)
-  dispatcher.add_handler(hangout_handler)
-  dispatcher.add_handler(CallbackQueryHandler(btn_join))
+  dp.add_handler(hangout_handler)
+  dp.add_handler(CallbackQueryHandler(btn_join))
 
   # Inline keyboard commands (the ones you can call with @)
   

@@ -1,17 +1,18 @@
 import sys
 from telegram import (
-    Update,
-    InlineQueryResultArticle,
-    InputTextMessageContent,
-    ParseMode,
-    InlineKeyboardButton,
-    InlineKeyboardMarkup,
+  Update,
+  InlineQueryResultArticle,
+  InputTextMessageContent,
+  ParseMode,
+  InlineKeyboardButton,
+  InlineKeyboardMarkup,
+  CallbackQuery
 )
 from telegram.ext import (
-    CallbackContext,
-    CommandHandler,
-    InlineQueryHandler,
-    CallbackQueryHandler
+  CallbackContext,
+  CommandHandler,
+  InlineQueryHandler,
+  CallbackQueryHandler,
 )
 
 def get_msg(command):
@@ -24,8 +25,9 @@ def get_msg(command):
     msg = msg + line
   return msg
 
-def btn_join(update: Update, _: CallbackContext) -> None:
+def btn_join(update: Update, context: CallbackContext) -> None:
+  print(update.callback_query.from_user.username) # the username
   query = update.callback_query
   query.answer()
   # usando query.data, scopri come ottenere il nick di chi c'è e aggiungilo alla lista
-  query.edit_message_text(text=f"Hai scelto 'io ci sono'")
+  
