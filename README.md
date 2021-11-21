@@ -26,5 +26,6 @@ python bot.py
 ```
 # Feature planning
 I'm going to use the [storing API](https://github.com/python-telegram-bot/python-telegram-bot/wiki/Storing-bot%2C-user-and-chat-related-data) to handle the hangout making process.
+- Update: I have to implement a method to handle the keys to access the different data based on the chat without the need to send the uuid in the chat
 
 Then, I will use the [persistance API](https://github.com/python-telegram-bot/python-telegram-bot/wiki/Making-your-bot-persistent) to add some feature that personalize the experience for every single chat
