@@ -1,10 +1,25 @@
-from telegram import Update, InlineQueryResultArticle, InputTextMessageContent
-from telegram.ext import Updater, CallbackContext, CommandHandler, MessageHandler, Filters, InlineQueryHandler
 import logging
-from src.helpers import get_msg
+from uuid import uuid4
+from telegram.utils.helpers import escape_markdown
+from telegram import (
+    Update, 
+    InlineQueryResultArticle, 
+    InputTextMessageContent,
+    ParseMode,
+    InlineKeyboardButton,
+    InlineKeyboardMarkup,
+)
+from telegram.ext import (
+    Updater,
+    CallbackContext,
+    CommandHandler, 
+    InlineQueryHandler,
+    CallbackQueryHandler
+)
+from src.helpers import get_msg, btn_join
 
 # Insert your token, you can have one from the BotFather
-TOKEN = "INSERISCI IL TUO TOKEN"
+TOKEN = "INSERISCI IL TOKEN"
 
 def start(update: Update, context: CallbackContext) -> None:
   context.bot.send_message(chat_id=update.effective_chat.id, text=get_msg('start'))
@@ -15,20 +30,12 @@ def help(update: Update, context: CallbackContext) -> None:
 def wiki(update: Update, context: CallbackContext) -> None:
   context.bot.send_message(chat_id=update.effective_chat.id, text=get_msg('help'))
 
-def inline_caps(update: Update, context: CallbackContext) -> None:
-  query = update.inline_query.query
-  if not query:
-    return
-  results = []
-  results.append(
-    InlineQueryResultArticle(
-      id=query.upper(),
-      title='caps',
-      input_message_content=InputTextMessageContent(query.upper())
-    )
-  )
-  context.bot.answer_inline_query(update.inline_query.id, results)
-
+def hangout(update: Update, _: CallbackContext) -> None:
+  keyboard = [
+      [InlineKeyboardButton("IO CI SONO", callback_data='1')]
+  ]
+  reply_markup = InlineKeyboardMarkup(keyboard)
+  update.message.reply_text(get_msg('hangout'), reply_markup=reply_markup)
 
 def main():
   # Create the Updater and pass the Token
@@ -42,7 +49,7 @@ def main():
   # Create the commands and add them to the dispatcher queue
   # text commands (the ones with the /)
   
-  # Comandi base - introduzione al bot
+  # Basic commands - starting and using the bot
   start_handler = CommandHandler('start', start)
   dispatcher.add_handler(start_handler)
   help_handler = CommandHandler('help', help)
@@ -50,13 +57,15 @@ def main():
   wiki_handler = CommandHandler('wiki', wiki)
   dispatcher.add_handler(wiki_handler)
 
-  # Inline keyboard commands (the ones you can call with @)
-  inline_caps_handler = InlineQueryHandler(inline_caps)
-  dispatcher.add_handler(inline_caps_handler)
+  # Hangouts making
+  hangout_handler = CommandHandler('usciamo', hangout)
+  dispatcher.add_handler(hangout_handler)
+  dispatcher.add_handler(CallbackQueryHandler(btn_join))
 
+  # Inline keyboard commands (the ones you can call with @)
+  
   # Start the bot
   updater.start_polling()
-
   # Run the bot until user presses Crtl-C or SIGINT, SIGTERM or SIGABRT
   updater.idle()
 
