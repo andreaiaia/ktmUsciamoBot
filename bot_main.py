@@ -3,7 +3,7 @@ from telegram.ext import Updater, CallbackContext, CommandHandler, MessageHandle
 import logging
 
 # Inserire il proprio token ottenuto dal BotFather
-TOKEN = "INSERISCI QUI IL TOKEN"
+TOKEN = "INSERISCI IL TUO TOKEN"
 
 def start(update: Update, context: CallbackContext):
   context.bot.send_message(chat_id=update.effective_chat.id, text="Benvenuto in ktmUsciamoBot, io sono qui per aiutare voialtri ad organizzarvi per uscire. \n Usa il comando /help per vedere la lista di ciò che posso fare.")
@@ -15,7 +15,7 @@ def caps(update: Update, context: CallbackContext):
   text_caps = ' '.join(context.args).upper()
   context.bot.send_message(chat_id=update.effective_chat.id, text=text_caps)
 
-def inline_caps(update: Update, contect: CallbackContext):
+def inline_caps(update: Update, context: CallbackContext):
   query = update.inline_query.query
   if not query:
     return
@@ -45,6 +45,7 @@ def main():
   dispatcher.add_handler(caps_handler)
 
   inline_caps_handler = InlineQueryHandler(inline_caps)
+  dispatcher.add_handler(inline_caps_handler)
 
   updater.start_polling()
   updater.idle()
