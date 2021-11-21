@@ -21,6 +21,6 @@ Telegram bot to organize hangouts with friends (yes I'm _this_ desperate).
 This bot requires the python-telegram-bot API (probably the most used to make bots in python).
 To install it on your local machine and set it up you can use the terminal:
 ```bash
-pip install python-telegram-bot
+pip install python-telegram-bot --upgrade
 python bot.py
 ```

@@ -8,7 +8,6 @@ from telegram import (
     InlineKeyboardMarkup,
 )
 from telegram.ext import (
-    Updater,
     CallbackContext,
     CommandHandler,
     InlineQueryHandler,
@@ -17,7 +16,7 @@ from telegram.ext import (
 
 def get_msg(command):
   parent = sys.path[0]
-  f = open(f"{parent}/texts/{command}.txt", "r")
+  f = open(f"{parent}/texts{command}.txt", "r")
   text = f.readlines()
   f.close()
   msg = ""

@@ -19,16 +19,10 @@ from telegram.ext import (
 from src.helpers import get_msg, btn_join
 
 # Insert your token, you can have one from the BotFather
-TOKEN = "INSERISCI IL TOKEN"
+TOKEN = "INSERT YOUR TOKEN HERE"
 
-def start(update: Update, context: CallbackContext) -> None:
-  context.bot.send_message(chat_id=update.effective_chat.id, text=get_msg('start'))
-
-def help(update: Update, context: CallbackContext) -> None:
-  context.bot.send_message(chat_id=update.effective_chat.id, text=get_msg('help'))
-
-def wiki(update: Update, context: CallbackContext) -> None:
-  context.bot.send_message(chat_id=update.effective_chat.id, text=get_msg('help'))
+def simple_reply(update: Update, context: CallbackContext) -> None:
+  context.bot.send_message(chat_id=update.effective_chat.id, text=get_msg(update.message.text))
 
 def hangout(update: Update, _: CallbackContext) -> None:
   keyboard = [
@@ -50,11 +44,11 @@ def main():
   # text commands (the ones with the /)
   
   # Basic commands - starting and using the bot
-  start_handler = CommandHandler('start', start)
+  start_handler = CommandHandler('start', simple_reply)
   dispatcher.add_handler(start_handler)
-  help_handler = CommandHandler('help', help)
+  help_handler = CommandHandler('help', simple_reply)
   dispatcher.add_handler(help_handler)
-  wiki_handler = CommandHandler('wiki', wiki)
+  wiki_handler = CommandHandler('wiki', simple_reply)
   dispatcher.add_handler(wiki_handler)
 
   # Hangouts making
