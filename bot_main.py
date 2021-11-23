@@ -26,6 +26,17 @@ def hangout(update: Update, _: CallbackContext) -> None:
   reply_markup = InlineKeyboardMarkup(keyboard)
   update.message.reply_text(get_msg('/hangout'), reply_markup=reply_markup)
 
+# Funny commands
+def bidoneDna(update: Update, context: CallbackContext) -> None:
+  key = str(update.message.chat.id) + '-' + str(update.message.from_user.id)
+  value = 0
+  if get(key, context):
+    value = int(get(key, context))
+  value += 1
+  put(key, value, context)
+  update.message.reply_text(f"Dna ha bidonato {str(value)} volte.")
+
+
 def main():
   # Create the Updater and pass the Token
   updater = Updater(TOKEN, use_context=True)
@@ -47,8 +58,8 @@ def main():
   dp.add_handler(CommandHandler('usciamo', hangout))
   dp.add_handler(CallbackQueryHandler(btn_join))
 
-  dp.add_handler(CommandHandler('put', put))
-  dp.add_handler(CommandHandler('get', get))
+  # Easter eggs
+  dp.add_handler(CommandHandler('bidoneDNA', bidoneDna))
 
   # Inline keyboard commands (the ones you can call with @)
   

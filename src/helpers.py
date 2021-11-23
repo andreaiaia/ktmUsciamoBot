@@ -26,24 +26,14 @@ def btn_join(update: Update, context: CallbackContext) -> None:
   # usando query.data, scopri come ottenere il nick di chi c'è e aggiungilo alla lista
   
 
-def put(update, context):
-    """Usage: /put value"""
-    # Generate ID and separate value from command
-    key = str(uuid4())
-    # We don't use context.args here, because the value may contain whitespaces
-    value = update.message.text.partition(' ')[2]
-
+def put(key, value, context):
+    # key = str(update.message.chat.id) + '-' + str(update.message.from_user.id)
     # Store value
     context.chat_data[key] = value
-    # Send the key to the user
-    update.message.reply_text(key)
 
 
-def get(update, context):
-    """Usage: /get uuid"""
-    # Seperate ID from command
-    key = context.args[0]
-
+def get(key, context):
+    # key = str(update.message.chat.id)
     # Load value and send it to the user
-    value = context.chat_data.get(key, 'Not found')
-    update.message.reply_text(value)
+    return context.chat_data.get(key, False)
+
