@@ -29,3 +29,7 @@ I'm going to use the [storing API](https://github.com/python-telegram-bot/python
 - Update: I have to implement a method to handle the keys to access the different data based on the chat without the need to send the uuid in the chat
 
 Then, I will use the [persistance API](https://github.com/python-telegram-bot/python-telegram-bot/wiki/Making-your-bot-persistent) to add some feature that personalize the experience for every single chat
+
+# Boh
+Non capivo perché a volte il comando update.message.from_user.id funzionasse e altre volte no ed ero costretto ad usare update.callback_query.from_user.id invece.
+Il motivo è che di solito il primo comando funziona, mentre la versione con callback_query la devo usare per le inlinekeyboard perché giustamente quando vengono usate non generano un messaggio, quindi usando la versione message mi ritrovo errore perché message è null.

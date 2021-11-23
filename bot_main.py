@@ -1,9 +1,7 @@
 import logging
 from telegram import (
     Update,  
-    ParseMode,
-    InlineKeyboardButton,
-    InlineKeyboardMarkup,
+    ParseMode
 )
 from telegram.ext import (
     Updater,
@@ -11,31 +9,12 @@ from telegram.ext import (
     CommandHandler, 
     CallbackQueryHandler
 )
-from src.helpers import (get_msg, btn_join, get, put)
+from src.helpers import (simple_reply, btn_join)
+from src.eastereggs import dna
+from src.hangoutMaking import hangout
 
 # Insert your token, you can have one from the BotFather
 TOKEN = "YOUR TOKEN HERE"
-
-def simple_reply(update: Update, context: CallbackContext) -> None:
-  context.bot.send_message(chat_id=update.effective_chat.id, text=get_msg(update.message.text))
-
-def hangout(update: Update, _: CallbackContext) -> None:
-  keyboard = [
-      [InlineKeyboardButton("IO CI SONO", callback_data='1')]
-  ]
-  reply_markup = InlineKeyboardMarkup(keyboard)
-  update.message.reply_text(get_msg('/hangout'), reply_markup=reply_markup)
-
-# Funny commands
-def bidoneDna(update: Update, context: CallbackContext) -> None:
-  key = str(update.message.chat.id) + '-' + str(update.message.from_user.id)
-  value = 0
-  if get(key, context):
-    value = int(get(key, context))
-  value += 1
-  put(key, value, context)
-  update.message.reply_text(f"Dna ha bidonato {str(value)} volte.")
-
 
 def main():
   # Create the Updater and pass the Token
@@ -56,10 +35,11 @@ def main():
 
   # Hangouts making
   dp.add_handler(CommandHandler('usciamo', hangout))
+  dp.add_handler(CommandHandler('join', hangout))
   dp.add_handler(CallbackQueryHandler(btn_join))
 
   # Easter eggs
-  dp.add_handler(CommandHandler('bidoneDNA', bidoneDna))
+  dp.add_handler(CommandHandler('dna', dna))
 
   # Inline keyboard commands (the ones you can call with @)
   
