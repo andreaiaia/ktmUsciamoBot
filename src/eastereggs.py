@@ -11,3 +11,6 @@ def dna(update: Update, context: CallbackContext) -> None:
   value += 1
   put(key, value, context)
   update.message.reply_text(f"Bidoni di Dna: {str(value)}.")
+
+def ping(update: Update, _: CallbackContext) -> None:
+  update.message.reply_text("PONG.")

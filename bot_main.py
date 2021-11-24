@@ -8,7 +8,7 @@ from telegram.ext import (
 )
 from src.hangoutMaking import hangout, join, abort, summary
 from src.helpers import (simple_reply, btn_join)
-from src.eastereggs import dna
+from src.eastereggs import dna, ping
 
 # Insert your token, you can have one from the BotFather
 TOKEN = "YOUR TOKEN HERE"
@@ -39,6 +39,7 @@ def main():
 
   # Easter eggs
   dp.add_handler(CommandHandler('dna', dna))
+  dp.add_handler(CommandHandler('ping', ping))
 
   # Inline keyboard commands (the ones you can call with @)
   
