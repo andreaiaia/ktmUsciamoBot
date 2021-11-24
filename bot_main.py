@@ -1,17 +1,14 @@
 import logging
-from telegram import (
-    Update,  
-    ParseMode
-)
+from telegram import Update, ParseMode
 from telegram.ext import (
     Updater,
     CallbackContext,
     CommandHandler, 
     CallbackQueryHandler
 )
+from src.hangoutMaking import hangout, join, abort, summary
 from src.helpers import (simple_reply, btn_join)
 from src.eastereggs import dna
-from src.hangoutMaking import hangout
 
 # Insert your token, you can have one from the BotFather
 TOKEN = "YOUR TOKEN HERE"
@@ -35,8 +32,10 @@ def main():
 
   # Hangouts making
   dp.add_handler(CommandHandler('usciamo', hangout))
-  dp.add_handler(CommandHandler('join', hangout))
   dp.add_handler(CallbackQueryHandler(btn_join))
+  dp.add_handler(CommandHandler('join', join))
+  dp.add_handler(CommandHandler('abort', abort))
+  dp.add_handler(CommandHandler('quindi', summary))
 
   # Easter eggs
   dp.add_handler(CommandHandler('dna', dna))

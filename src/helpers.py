@@ -16,19 +16,18 @@ def get_msg(command):
     msg = msg + line
   return msg
 
-def btn_join(update: Update, context: CallbackContext) -> None:
+def btn_join(update: Update, _: CallbackContext) -> None:
   print(update.callback_query.from_user.username) # the username
   query = update.callback_query
   query.answer()
 
 def put(key, value, context):
-    # how to make a key: 
-    # str(update.message.chat.id) + '-' + str(update.message.from_user.id)
-    # Store value
-    context.chat_data[key] = value
+  # how to make a key: 
+  # str(update.message.chat.id) + '-' + str(update.message.from_user.id)
+  # Store value
+  context.chat_data[key] = value
 
 
 def get(key, context):
-    # Load value and send it to the user
-    return context.chat_data.get(key, False)
-
+  # Load value and send it to the user
+  return context.chat_data.get(key, False)
