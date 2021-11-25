@@ -8,6 +8,7 @@ from telegram import (
 from telegram.ext import CallbackContext
 from src.helpers import get_msg, put, get
 
+
 def hangout(update: Update, context: CallbackContext) -> None:
     keyboard = [
         [InlineKeyboardButton("IO CI SONO", callback_data='1')]
@@ -16,8 +17,9 @@ def hangout(update: Update, context: CallbackContext) -> None:
     update.message.reply_text(get_msg('/hangout'), reply_markup=reply_markup)
     key = f"{str(update.message.chat.id)}-hangout"
     put(key, "", context)
-    timeout = threading.Timer(7200, expired) # 2 hours timeout
+    timeout = threading.Timer(7200, next_step) # 2 hours timeout
     timeout.start()
+
 
 def join(update: Update, context: CallbackContext) -> None:
     key = f"{str(update.message.chat.id)}-hangout"
@@ -33,10 +35,17 @@ def join(update: Update, context: CallbackContext) -> None:
         context.bot.send_message(
             chat_id=update.effective_chat.id, text=get_msg('/join_failed_reply'))
 
-def expired(update: Update, context: CallbackContext) -> None:
+
+def next_step(update: Update, context: CallbackContext) -> None:
     key = f"{str(update.message.chat.id)}-hangout"
-    if get(key, context) == "":
+    folks = get(key, context)
+    num_folks = folks.count('@')
+
+    if folks == "" or num_folks < 2:
         abort(update, context)
+    else:
+        when(update, context)
+
 
 def abort(update: Update, context: CallbackContext) -> None:
     key = f"{str(update.message.chat.id)}-hangout"
@@ -44,6 +53,11 @@ def abort(update: Update, context: CallbackContext) -> None:
     text = get_msg('/abort')
     context.bot.send_message(
         chat_id=update.effective_chat.id, text=text)
+
+
+def when(update: Update, context: CallbackContext) -> None:
+    context.bot.send_message(chat_id=update.effective_chat.id, text=get_msg('/when'))
+
 
 def summary(update: Update, context: CallbackContext) -> None:
     key = f"{str(update.message.chat.id)}-hangout"

@@ -33,6 +33,3 @@ def put(key, value, context) -> None:
 def get(key, context):
     # Load value and send it to the user
     return context.chat_data.get(key, False)
-
-def put_disk(key, context) -> None:
-    print('ciao')
