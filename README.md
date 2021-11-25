@@ -27,7 +27,13 @@ python bot.py
 # Feature planning - next steps
 - Command to add location proposals (new)
 - Command to choice the meeting time
-- I'm going to use the [persistance API](https://github.com/python-telegram-bot/python-telegram-bot/wiki/Making-your-bot-persistent) to add some feature that personalize the experience for every single chat
+
+## Update on persistance
+To save the data, the process is as simple as add this code at the beginning of the main function:
+```python
+persistence = PicklePersistence(filename='conversationbot')
+updater = Updater("TOKEN", persistence=persistence)
+```
 
 # Boh
 Non capivo perché a volte il comando update.message.from_user.id funzionasse e altre volte no ed ero costretto ad usare update.callback_query.from_user.id invece.

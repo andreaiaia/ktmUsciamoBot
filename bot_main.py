@@ -7,7 +7,7 @@ from telegram.ext import (
     CallbackQueryHandler
 )
 from src.hangoutMaking import hangout, join, abort, summary
-from src.helpers import (simple_reply, btn_join)
+from src.helpers import (simple_reply, btn_join, add_group)
 from src.eastereggs import dna, ping
 
 # Insert your token, you can have one from the BotFather
@@ -29,6 +29,9 @@ def main():
   dp.add_handler(CommandHandler('start', simple_reply))
   dp.add_handler(CommandHandler('help', simple_reply))
   dp.add_handler(CommandHandler('wiki', simple_reply))
+  # New group member
+  add_group_handle = MessageHandler(Filters.status_update.new_chat_members, add_group)
+  dispatcher.add_handler(add_group_handle)
 
   # Hangouts making
   dp.add_handler(CommandHandler('usciamo', hangout))

@@ -6,6 +6,9 @@ def simple_reply(update: Update, context: CallbackContext) -> None:
   context.bot.send_message(
       chat_id=update.effective_chat.id, text=get_msg(update.message.text))
 
+def add_group(update: Update, context: CallbackContext):
+    update.message.reply_text(get_msg('/start'))
+
 def get_msg(command):
   parent = sys.path[0]
   f = open(f"{parent}/texts{command}.txt", "r")
@@ -21,13 +24,15 @@ def btn_join(update: Update, _: CallbackContext) -> None:
   query = update.callback_query
   query.answer()
 
-def put(key, value, context):
+def put(key, value, context) -> None:
   # how to make a key: 
   # str(update.message.chat.id) + '-' + str(update.message.from_user.id)
   # Store value
   context.chat_data[key] = value
 
-
 def get(key, context):
   # Load value and send it to the user
   return context.chat_data.get(key, False)
+
+def put_disk(key, context) -> None:
+  print('ciao')
