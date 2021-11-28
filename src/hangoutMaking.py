@@ -25,8 +25,8 @@ def join(update: Update, context: CallbackContext) -> None:
     key = f"{str(update.message.chat.id)}-hangout"
     if get(key, context) == "":
         folks = get(key, context)
-        newFolk = str(update.message.from_user.username)
-        folks = f"@{newFolk} {folks}"
+        new_folk = str(update.message.from_user.username)
+        folks = f"@{new_folk} {folks}"
         put(key, folks, context)
         text = f"Per ora ci sono: {folks}."
         context.bot.send_message(
@@ -63,8 +63,6 @@ def summary(update: Update, context: CallbackContext) -> None:
     key = f"{str(update.message.chat.id)}-hangout"
     folks = get(key, context)
     text = "Non si fa nulla per ora, sorry not sorry."
-    text2 = ""
-    text3 = ""
 
     if folks != "aborted" and folks != False:
         text = f"Per ora siamo {folks}."

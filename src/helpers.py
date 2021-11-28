@@ -1,17 +1,13 @@
 import sys
-from telegram import Update
+from telegram import Update, ParseMode
 from telegram.ext import CallbackContext
 
 def simple_reply(update: Update, context: CallbackContext) -> None:
-    context.bot.send_message(
-        chat_id=update.effective_chat.id, text=get_msg(update.message.text))
-
-def add_group(update: Update, context: CallbackContext):
-    update.message.reply_text(get_msg('/start'))
+    update.message.reply_text(get_msg(update.message.text), parse_mode="MarkdownV2")
 
 def get_msg(command):
     parent = sys.path[0]
-    f = open(f"{parent}/texts{command}.txt", "r")
+    f = open(f"{parent}/texts{command}.md", "r")
     text = f.readlines()
     f.close()
     msg = ""
@@ -26,7 +22,7 @@ def btn_join(update: Update, _: CallbackContext) -> None:
 
 def put(key, value, context) -> None:
     # how to make a key: 
-    # str(update.message.chat.id) + '-' + str(update.message.from_user.id)
+    # str(update.message.chat.id)
     # Store value
     context.chat_data[key] = value
 
