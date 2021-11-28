@@ -1,3 +1,4 @@
+import sys
 from telegram import Update
 from telegram.ext import CallbackContext
 from src.helpers import (get, put)
@@ -13,3 +14,8 @@ def dna(update: Update, context: CallbackContext) -> None:
 
 def ping(update: Update, _: CallbackContext) -> None:
     update.message.reply_text("PONG.")
+
+def angry(update: Update, _:CallbackContext) -> None:
+    parent = sys.path[0]
+    pic = f"{parent}/img/violence.jpg"
+    update.message.reply_photo(photo = open(pic, 'rb'))

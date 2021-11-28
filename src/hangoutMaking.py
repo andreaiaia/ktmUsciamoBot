@@ -38,10 +38,11 @@ def join(update: Update, context: CallbackContext) -> None:
 
 def next_step(update: Update, context: CallbackContext) -> None:
     key = f"{str(update.message.chat.id)}-hangout"
+    unstoppable = get(f"{key}-prevent", context)
     folks = get(key, context)
     num_folks = folks.count('@')
 
-    if folks == "" or num_folks < 2:
+    if folks == "" or num_folks < 2 or unstoppable == True:
         abort(update, context)
     else:
         when(update, context)
@@ -53,6 +54,18 @@ def abort(update: Update, context: CallbackContext) -> None:
     text = get_msg('/abort')
     context.bot.send_message(
         chat_id=update.effective_chat.id, text=text)
+
+def prevent_abort(update: Update, context: CallbackContext) -> None:
+    # This function toggle the -prevent item saved in the chat data
+    # so that a quest cannot be aborted by expiration
+    key = f"{str(update.message.chat.id)}-hangout-prevent"
+    status = not get(key, context)
+    put(key, status, context)
+    if status:
+        text = "La quest è diventata _ineluttabile_\."
+    else:
+        text = "Hai disinnescato la bomba\."
+    update.message.reply_text(text, parse_mode="MarkdownV2")
 
 
 def when(update: Update, context: CallbackContext) -> None:

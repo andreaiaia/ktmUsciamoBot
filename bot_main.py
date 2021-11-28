@@ -6,12 +6,12 @@ from telegram.ext import (
     CommandHandler, 
     CallbackQueryHandler
 )
-from src.hangoutMaking import hangout, join, abort, summary
+from src.hangoutMaking import hangout, join, abort, prevent_abort, summary
 from src.helpers import simple_reply, btn_join
-from src.eastereggs import dna, ping
+from src.eastereggs import angry, dna, ping
 
 # Insert your token, you can have one from the BotFather
-TOKEN = "TOKEN"
+TOKEN = "YOUR TOKEN HERE"
 
 def main():
     # Create the Updater and pass the Token
@@ -34,12 +34,16 @@ def main():
     dp.add_handler(CommandHandler('usciamo', hangout))
     dp.add_handler(CallbackQueryHandler(btn_join))
     dp.add_handler(CommandHandler('join', join))
+
+    # Comandi meta per l'hangout making
     dp.add_handler(CommandHandler('abort', abort))
     dp.add_handler(CommandHandler('quindi', summary))
+    dp.add_handler(CommandHandler('finepenamai', prevent_abort))
 
     # Easter eggs
     dp.add_handler(CommandHandler('dna', dna))
     dp.add_handler(CommandHandler('ping', ping))
+    dp.add_handler(CommandHandler('violence', angry))
 
     # Inline keyboard commands (the ones you can call with @)
     
