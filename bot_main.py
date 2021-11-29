@@ -12,7 +12,6 @@ from telegram.ext import (
 from src.hangoutMaking import hangout, join, abort, prevent_abort, summary, inline_hangout
 from src.helpers import simple_reply, btn_join, unknown
 from src.eastereggs import angry, dna, ping
-from src.dynamicKb import build_menu
 
 # Insert your token, you can have one from the BotFather
 TOKEN = "TOKEN"
