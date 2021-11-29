@@ -4,8 +4,7 @@ from telegram import (
     InlineKeyboardButton,
     InlineKeyboardMarkup,
     InputTextMessageContent,
-    InlineQueryResultArticle,
-    ParseMode
+    InlineQueryResultArticle
 )
 from telegram.ext import CallbackContext
 from src.helpers import get_msg, put, get
@@ -83,7 +82,7 @@ def prevent_abort(update: Update, context: CallbackContext) -> None:
         text = "La quest è diventata _ineluttabile_\."
     else:
         text = "Hai disinnescato la bomba\."
-    update.message.reply_text(text, parse_mode=ParseMode.MarkdownV2)
+    update.message.reply_text(text, parse_mode="MarkdownV2")
 
 
 def when(update: Update, context: CallbackContext) -> None:

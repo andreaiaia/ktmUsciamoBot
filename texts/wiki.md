@@ -1,7 +1,6 @@
 Abbi pazienza, Roma non si è costruita in un giorno, figurati questo bot\.
 
 Bozza:
-Ecco cosa posso fare:
 
 /wiki \- tutorial approfondito sull'utilizzo del bot
 

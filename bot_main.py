@@ -1,5 +1,5 @@
 import logging
-from telegram import Update
+from telegram import Update, KeyboardButton
 from telegram.ext import (
     Updater,
     CallbackContext,
@@ -12,6 +12,7 @@ from telegram.ext import (
 from src.hangoutMaking import hangout, join, abort, prevent_abort, summary, inline_hangout
 from src.helpers import simple_reply, btn_join, unknown
 from src.eastereggs import angry, dna, ping
+from src.dynamicKb import build_menu
 
 # Insert your token, you can have one from the BotFather
 TOKEN = "TOKEN"
@@ -50,6 +51,11 @@ def main():
     dp.add_handler(CommandHandler('dna', dna))
     dp.add_handler(CommandHandler('ping', ping))
     dp.add_handler(CommandHandler('violence', angry))
+
+    # TESTING AREA
+    some_strings = ["col1", "col2", "row2"]
+    button_list = [[KeyboardButton(s)] for s in some_strings]
+    build_menu(button_list, 2)
 
     # Invalid command handler - this MUST be the last handler
     dp.add_handler(MessageHandler(Filters.command, unknown))
