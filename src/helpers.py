@@ -3,7 +3,7 @@ from telegram import Update, ParseMode
 from telegram.ext import CallbackContext
 
 def simple_reply(update: Update, context: CallbackContext) -> None:
-    update.message.reply_text(get_msg(update.message.text), parse_mode="MarkdownV2")
+    update.message.reply_text(get_msg(update.message.text), parse_mode=ParseMode.MarkdownV2)
 
 def get_msg(command):
     parent = sys.path[0]
@@ -29,3 +29,8 @@ def put(key, value, context) -> None:
 def get(key, context):
     # Load value and send it to the user
     return context.chat_data.get(key, False)
+
+
+def unknown(update: Update, context: CallbackContext):
+    context.bot.send_message(chat_id=update.effective_chat.id,
+                            text="Non posso farlo questo, AO le hai lette le istruzioni? Usa /help o /wiki.")

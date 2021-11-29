@@ -3,15 +3,18 @@ from telegram import Update
 from telegram.ext import (
     Updater,
     CallbackContext,
-    CommandHandler, 
-    CallbackQueryHandler
+    CommandHandler,
+    MessageHandler,
+    Filters,
+    CallbackQueryHandler,
+    InlineQueryHandler
 )
-from src.hangoutMaking import hangout, join, abort, prevent_abort, summary
-from src.helpers import simple_reply, btn_join
+from src.hangoutMaking import hangout, join, abort, prevent_abort, summary, inline_hangout
+from src.helpers import simple_reply, btn_join, unknown
 from src.eastereggs import angry, dna, ping
 
 # Insert your token, you can have one from the BotFather
-TOKEN = "YOUR TOKEN HERE"
+TOKEN = "TOKEN"
 
 def main():
     # Create the Updater and pass the Token
@@ -40,13 +43,16 @@ def main():
     dp.add_handler(CommandHandler('quindi', summary))
     dp.add_handler(CommandHandler('finepenamai', prevent_abort))
 
+    # Inline query handlers (the ones you can call with @)
+    dp.add_handler(InlineQueryHandler(inline_hangout))
+
     # Easter eggs
     dp.add_handler(CommandHandler('dna', dna))
     dp.add_handler(CommandHandler('ping', ping))
     dp.add_handler(CommandHandler('violence', angry))
 
-    # Inline keyboard commands (the ones you can call with @)
-    
+    # Invalid command handler - this MUST be the last handler
+    dp.add_handler(MessageHandler(Filters.command, unknown))
     # Start the bot
     updater.start_polling()
     # Run the bot until user presses Crtl-C or SIGINT, SIGTERM or SIGABRT

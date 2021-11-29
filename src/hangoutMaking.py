@@ -1,9 +1,11 @@
 import threading
 from telegram import (
     Update,
-    ParseMode,
     InlineKeyboardButton,
     InlineKeyboardMarkup,
+    InputTextMessageContent,
+    InlineQueryResultArticle,
+    ParseMode
 )
 from telegram.ext import CallbackContext
 from src.helpers import get_msg, put, get
@@ -19,6 +21,22 @@ def hangout(update: Update, context: CallbackContext) -> None:
     put(key, "", context)
     timeout = threading.Timer(7200, next_step) # 2 hours timeout
     timeout.start()
+
+
+def inline_hangout(update: Update, context: CallbackContext) -> None:
+    query = update.inline_query.query
+    if not query:
+        return
+    results = []
+    # Qui aggiungo gli orari tra cui scegliere
+    results.append(
+        InlineQueryResultArticle(
+            id=query.upper(),
+            title='Hangout',
+            input_message_content=InputTextMessageContent(query.upper())
+        )
+    )
+    context.bot.answer_inline_query(update.inline_query.id, results)
 
 
 def join(update: Update, context: CallbackContext) -> None:
@@ -65,7 +83,7 @@ def prevent_abort(update: Update, context: CallbackContext) -> None:
         text = "La quest è diventata _ineluttabile_\."
     else:
         text = "Hai disinnescato la bomba\."
-    update.message.reply_text(text, parse_mode="MarkdownV2")
+    update.message.reply_text(text, parse_mode=ParseMode.MarkdownV2)
 
 
 def when(update: Update, context: CallbackContext) -> None:
