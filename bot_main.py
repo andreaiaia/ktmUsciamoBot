@@ -52,9 +52,9 @@ def main():
     dp.add_handler(CommandHandler('violence', angry))
 
     # TESTING AREA
-    some_strings = ["col1", "col2", "row2"]
-    button_list = [[KeyboardButton(s)] for s in some_strings]
-    build_menu(button_list, 2)
+    # some_strings = ["col1", "col2", "row2"]
+    # button_list = [[KeyboardButton(s)] for s in some_strings]
+    # build_menu(button_list, 2)
 
     # Invalid command handler - this MUST be the last handler
     dp.add_handler(MessageHandler(Filters.command, unknown))
