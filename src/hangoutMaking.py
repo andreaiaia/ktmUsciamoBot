@@ -99,12 +99,12 @@ def summary(update: Update, context: CallbackContext) -> None:
 
     loc_key = f"{str(update.message.chat.id)}-location"
     location = get(loc_key, context)
-    if location != "aborted" and folks != False:
+    if location != "aborted" and location != False:
         text = f"{text}\nDovremmo andare a {location}."
     
     time_key = f"{str(update.message.chat.id)}-time"
     time = get(time_key, context)
-    if time != "aborted" and folks != False:
+    if time != "aborted" and time != False:
         text = f"{text}\nCi vediamo alle {time}."
     
     context.bot.send_message(
