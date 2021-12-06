@@ -9,7 +9,7 @@ from telegram.ext import (
     CallbackQueryHandler,
     InlineQueryHandler
 )
-from src.hangoutMaking import hangout, join, abort, prevent_abort, summary, inline_hangout
+from src.hangoutMaking import hangout, join, abort, summary, inline_hangout
 from src.helpers import simple_reply, btn_join, unknown
 from src.eastereggs import angry, dna, ping
 
@@ -41,7 +41,6 @@ def main():
     # Comandi meta per l'hangout making
     dp.add_handler(CommandHandler('abort', abort))
     dp.add_handler(CommandHandler('quindi', summary))
-    dp.add_handler(CommandHandler('finepenamai', prevent_abort))
 
     # Inline query handlers (the ones you can call with @)
     dp.add_handler(InlineQueryHandler(inline_hangout))
