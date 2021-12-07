@@ -37,17 +37,16 @@ def inline_hangout(update: Update, context: CallbackContext) -> None:
 
 def join(update: Update, context: CallbackContext) -> None:
     key = f"{str(update.effective_chat.id)}-hangout"
-    if get(key, context) == "":
-        folks = get(key, context)
+    folks = get(key, context)
+    if folks != "":
         new_folk = str(update.message.from_user.username)
         folks = f"@{new_folk} {folks}"
         put(key, folks, context)
         text = f"Per ora ci sono: {folks}."
-        context.bot.send_message(
-            chat_id=update.effective_chat.id, text=text)
     else:
-        context.bot.send_message(
-            chat_id=update.effective_chat.id, text=get_msg('/join_failed_reply'))
+        text = get_msg('/join_failed_reply')
+    
+    context.bot.send_message(chat_id=update.effective_chat.id, text=text)
 
 
 def abort(update: Update, context: CallbackContext) -> None:
