@@ -19,3 +19,4 @@ def angry(update: Update, _:CallbackContext) -> None:
     parent = sys.path[0]
     pic = f"{parent}/img/violence.jpg"
     update.message.reply_photo(photo = open(pic, 'rb'))
+

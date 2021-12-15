@@ -1,7 +1,5 @@
 from telegram import (
     Update,
-    InlineKeyboardButton,
-    InlineKeyboardMarkup,
     InputTextMessageContent,
     InlineQueryResultArticle
 )
@@ -10,29 +8,9 @@ from src.helpers import get_msg, put, get
 
 
 def hangout(update: Update, context: CallbackContext) -> None:
-    keyboard = [
-        [InlineKeyboardButton("IO CI SONO", callback_data='1')]
-    ]
-    reply_markup = InlineKeyboardMarkup(keyboard)
-    update.message.reply_text(get_msg('/hangout'), reply_markup=reply_markup)
     key = f"{str(update.effective_chat.id)}-hangout"
     put(key, "", context)
-
-
-def inline_hangout(update: Update, context: CallbackContext) -> None:
-    query = update.inline_query.query
-    if not query:
-        return
-    results = []
-    # Qui aggiungo gli orari tra cui scegliere
-    results.append(
-        InlineQueryResultArticle(
-            id=query.upper(),
-            title='Hangout',
-            input_message_content=InputTextMessageContent(query.upper())
-        )
-    )
-    context.bot.answer_inline_query(update.inline_query.id, results)
+    update.message.reply_text(get_msg('/hangout'))
 
 
 def join(update: Update, context: CallbackContext) -> None:
@@ -42,7 +20,7 @@ def join(update: Update, context: CallbackContext) -> None:
         text = get_msg('/join_failed_reply')
     else:
         new_folk = str(update.message.from_user.username)
-        folks = f"@{new_folk} {folks}"
+        folks = f"{folks} @{new_folk}"
         put(key, folks, context)
         text = f"Per ora ci sono: {folks}."
     
@@ -71,7 +49,6 @@ def summary(update: Update, context: CallbackContext) -> None:
 
     loc_key = f"{str(update.effective_chat.id)}-location"
     location = get(loc_key, context)
-    print(location)
     if location != "aborted" and location != False:
         text = f"{text}\nDovremmo andare a {location}."
     
