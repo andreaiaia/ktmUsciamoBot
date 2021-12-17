@@ -10,7 +10,7 @@ from telegram.ext import (
     InlineQueryHandler
 )
 from src.hangoutMaking import hangout, join, abort, summary
-from src.helpers import simple_reply, btn_join, unknown
+from src.helpers import simple_reply, unknown
 from src.eastereggs import dna, ping, sendPic, sendAudio, sendGif
 
 # Insert your token, you can have one from the BotFather
@@ -35,7 +35,6 @@ def main():
 
     # Hangouts making
     dp.add_handler(CommandHandler('usciamo', hangout))
-    dp.add_handler(CallbackQueryHandler(btn_join))
     dp.add_handler(CommandHandler('join', join))
 
     # Comandi meta per l'hangout making

@@ -17,15 +17,18 @@ def ping(update: Update, _: CallbackContext) -> None:
 
 def sendPic(update: Update, _: CallbackContext) -> None:
     parent = sys.path[0]
-    pic = f"{parent}/img{(update.message.text)}.jpg"
+    filename = (update.message.text).split('@')
+    pic = f"{parent}/img{filename[0]}.jpg"
     update.message.reply_photo(photo = open(pic, 'rb'))
 
 def sendAudio(update: Update, _: CallbackContext) -> None:
     parent = sys.path[0]
-    media = f"{parent}/img{(update.message.text)}.mp3"
+    filename = (update.message.text).split('@')
+    media = f"{parent}/img{filename[0]}.mp3"
     update.message.reply_audio(audio = open(media, 'rb'))
 
 def sendGif(update: Update, _: CallbackContext) -> None:
     parent = sys.path[0]
-    media = f"{parent}/img{(update.message.text)}.gif"
+    filename = (update.message.text).split('@')
+    media = f"{parent}/img{filename[0]}.gif"
     update.message.reply_animation(animation = open(media, 'rb'))
