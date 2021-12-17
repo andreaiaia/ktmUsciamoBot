@@ -11,7 +11,7 @@ from telegram.ext import (
 )
 from src.hangoutMaking import hangout, join, abort, summary
 from src.helpers import simple_reply, unknown
-from src.eastereggs import dna, ping, sendPic, sendAudio, sendGif
+from src.eastereggs import dna, ping, badum, sendPic, sendAudio, sendGif
 
 # Insert your token, you can have one from the BotFather
 TOKEN = "TOKEN"
@@ -45,7 +45,7 @@ def main():
     dp.add_handler(CommandHandler('dna', dna))
     dp.add_handler(CommandHandler('ping', ping))
     dp.add_handler(CommandHandler('violence', sendPic))
-    dp.add_handler(CommandHandler('badum', sendAudio))
+    dp.add_handler(CommandHandler('badum', badum))
     dp.add_handler(CommandHandler('grosso', sendGif))
     dp.add_handler(CommandHandler('shesaid', sendGif))
 
