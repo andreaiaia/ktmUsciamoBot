@@ -2,7 +2,7 @@ import sys
 from telegram import Update
 from telegram.ext import CallbackContext
 
-def simple_reply(update: Update, context: CallbackContext) -> None:
+def simple_reply(update: Update, _: CallbackContext) -> None:
     update.message.reply_text(get_msg(update.message.text), parse_mode="MarkdownV2")
 
 def get_msg(command):

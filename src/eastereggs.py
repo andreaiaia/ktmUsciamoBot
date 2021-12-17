@@ -15,12 +15,17 @@ def dna(update: Update, context: CallbackContext) -> None:
 def ping(update: Update, _: CallbackContext) -> None:
     update.message.reply_text("PONG.")
 
-def angry(update: Update, _: CallbackContext) -> None:
+def sendPic(update: Update, _: CallbackContext) -> None:
     parent = sys.path[0]
-    pic = f"{parent}/img/violence.jpg"
+    pic = f"{parent}/img{(update.message.text)}.jpg"
     update.message.reply_photo(photo = open(pic, 'rb'))
 
-def badum(update: Update, _: CallbackContext) -> None:
+def sendAudio(update: Update, _: CallbackContext) -> None:
     parent = sys.path[0]
-    media = f"{parent}/img/tsss.mp3"
+    media = f"{parent}/img{(update.message.text)}.mp3"
     update.message.reply_audio(audio = open(media, 'rb'))
+
+def sendGif(update: Update, _: CallbackContext) -> None:
+    parent = sys.path[0]
+    media = f"{parent}/img{(update.message.text)}.gif"
+    update.message.reply_animation(animation = open(media, 'rb'))

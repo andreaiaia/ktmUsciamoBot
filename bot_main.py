@@ -11,7 +11,7 @@ from telegram.ext import (
 )
 from src.hangoutMaking import hangout, join, abort, summary
 from src.helpers import simple_reply, btn_join, unknown
-from src.eastereggs import angry, dna, ping, badum
+from src.eastereggs import dna, ping, sendPic, sendAudio, sendGif
 
 # Insert your token, you can have one from the BotFather
 TOKEN = "TOKEN"
@@ -45,8 +45,10 @@ def main():
     # Easter eggs
     dp.add_handler(CommandHandler('dna', dna))
     dp.add_handler(CommandHandler('ping', ping))
-    dp.add_handler(CommandHandler('violence', angry))
-    dp.add_handler(CommandHandler('badum', badum))
+    dp.add_handler(CommandHandler('violence', sendPic))
+    dp.add_handler(CommandHandler('badum', sendAudio))
+    dp.add_handler(CommandHandler('grosso', sendGif))
+    dp.add_handler(CommandHandler('shesaid', sendGif))
 
 
     # TESTING AREA
