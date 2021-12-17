@@ -9,7 +9,7 @@ from telegram.ext import (
     CallbackQueryHandler,
     InlineQueryHandler
 )
-from src.hangoutMaking import hangout, join, abort, summary
+from src.hangoutMaking import hangout, join, abort, summary, when
 from src.helpers import simple_reply, unknown
 from src.eastereggs import dna, ping, badum, sendPic, sendAudio, sendGif
 
@@ -36,6 +36,7 @@ def main():
     # Hangouts making
     dp.add_handler(CommandHandler('usciamo', hangout))
     dp.add_handler(CommandHandler('join', join))
+    dp.add_handler(CommandHandler('alle', when))
 
     # Comandi meta per l'hangout making
     dp.add_handler(CommandHandler('abort', abort))

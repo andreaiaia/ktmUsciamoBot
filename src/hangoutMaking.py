@@ -36,7 +36,27 @@ def abort(update: Update, context: CallbackContext) -> None:
 
 
 def when(update: Update, context: CallbackContext) -> None:
-    context.bot.send_message(chat_id=update.effective_chat.id, text=get_msg('/when'))
+    # TODO fare la leaderboard degli orari proposti
+    key = f"{str(update.effective_chat.id)}-time"
+
+    msg = (update.message.text).split()     # msg contiene l'orario proposto
+    leaderboard = get(key, context)
+
+    if (leaderboard == False):
+        newLeaderboard = {f"{msg[1]}": 1,}
+    else:
+        newLeaderboard = leaderboard
+        if msg[1] in newLeaderboard.keys():
+            newLeaderboard[msg[1]] += 1
+        else:
+            newLeaderboard[msg[1]] = 1
+
+    put(key, newLeaderboard, context)
+    
+    meeting_time = most_upvoted(newLeaderboard)
+
+    text = f"{get_msg('/when')}{meeting_time}"
+    context.bot.send_message(chat_id=update.effective_chat.id, text=text)
 
 
 def summary(update: Update, context: CallbackContext) -> None:
@@ -59,3 +79,13 @@ def summary(update: Update, context: CallbackContext) -> None:
     
     context.bot.send_message(
         chat_id=update.effective_chat.id, text=text)
+
+
+def most_upvoted(times):
+    winner = {"time": "0", "val": 0}
+    for i in times:
+        if times[i] >= winner["val"]:
+            winner["time"] = i
+            winner["val"] = times[i]
+    
+    return winner["time"]
