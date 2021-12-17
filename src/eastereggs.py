@@ -15,8 +15,12 @@ def dna(update: Update, context: CallbackContext) -> None:
 def ping(update: Update, _: CallbackContext) -> None:
     update.message.reply_text("PONG.")
 
-def angry(update: Update, _:CallbackContext) -> None:
+def angry(update: Update, _: CallbackContext) -> None:
     parent = sys.path[0]
     pic = f"{parent}/img/violence.jpg"
     update.message.reply_photo(photo = open(pic, 'rb'))
 
+def badum(update: Update, _: CallbackContext) -> None:
+    parent = sys.path[0]
+    media = f"{parent}/img/tsss.mp3"
+    update.message.reply_audio(audio = open(media, 'rb'))

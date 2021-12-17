@@ -9,9 +9,9 @@ from telegram.ext import (
     CallbackQueryHandler,
     InlineQueryHandler
 )
-from src.hangoutMaking import hangout, join, abort, summary, inline_hangout
+from src.hangoutMaking import hangout, join, abort, summary
 from src.helpers import simple_reply, btn_join, unknown
-from src.eastereggs import angry, dna, ping
+from src.eastereggs import angry, dna, ping, badum
 
 # Insert your token, you can have one from the BotFather
 TOKEN = "TOKEN"
@@ -42,13 +42,12 @@ def main():
     dp.add_handler(CommandHandler('abort', abort))
     dp.add_handler(CommandHandler('quindi', summary))
 
-    # Inline query handlers (the ones you can call with @)
-    dp.add_handler(InlineQueryHandler(inline_hangout))
-
     # Easter eggs
     dp.add_handler(CommandHandler('dna', dna))
     dp.add_handler(CommandHandler('ping', ping))
     dp.add_handler(CommandHandler('violence', angry))
+    dp.add_handler(CommandHandler('badum', badum))
+
 
     # TESTING AREA
     # some_strings = ["col1", "col2", "row2"]
