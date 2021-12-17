@@ -15,6 +15,11 @@ def dna(update: Update, context: CallbackContext) -> None:
 def ping(update: Update, _: CallbackContext) -> None:
     update.message.reply_text("PONG.")
 
+def badum(update: Update, context: CallbackContext) -> None:
+    parent = sys.path[0]
+    media = f"{parent}/img/tsss.mp3"
+    update.message.reply_audio(audio = open(media, 'rb'))
+
 def sendPic(update: Update, _: CallbackContext) -> None:
     parent = sys.path[0]
     filename = (update.message.text).split('@')
